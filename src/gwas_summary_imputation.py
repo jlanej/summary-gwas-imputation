@@ -92,6 +92,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     if args.frequency_filter is not None:
+        print("frequency_filter", args.frequency_filter)
         # Ensure the value is within a valid range (e.g., 0 <= frequency_filter < 1)
         if not (0 <= args.frequency_filter < 1):
             raise ValueError("frequency_filter must be between 0 (inclusive) and 1 (exclusive).")
