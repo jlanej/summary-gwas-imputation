@@ -80,7 +80,7 @@ if __name__ == "__main__":
     parser.add_argument("-output", help="Where to save stuff")
     parser.add_argument("-cutoff", help="naive cutoff when performing SVD", type=float, default=0)
     parser.add_argument("-regularization", help="Ridge-like regularization for matrix inversion", type=float, default=0)
-    parser.add_argument("-frequency_filter", help="Skip variants with frequency (below f) or above (1-f)", type=float)
+    parser.add_argument("-frequency_filter", help="Skip variants with frequency (below f) or above (1-f)", type=float, default=0)
     parser.add_argument("-sub_batches", help="Split the data into subsets", type=int)
     parser.add_argument("-sub_batch", help="only do this subset", type=int)
     parser.add_argument("-containing", help="only do this subset", type=int)
