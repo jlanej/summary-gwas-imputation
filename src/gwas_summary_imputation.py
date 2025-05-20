@@ -91,6 +91,11 @@ if __name__ == "__main__":
     parser.add_argument("-parsimony", help="Log verbosity level. 1 is everything being logged. 10 is only high level messages, above 10 will hardly log anything", default = "10")
 
     args = parser.parse_args()
+    if args.frequency_filter is not None:
+        # Ensure the value is within a valid range (e.g., 0 <= frequency_filter < 1)
+        if not (0 <= args.frequency_filter < 1):
+            raise ValueError("frequency_filter must be between 0 (inclusive) and 1 (exclusive).")
+
 
     Logging.configure_logging(int(args.parsimony))
 
