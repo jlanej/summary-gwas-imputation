@@ -213,6 +213,7 @@ def _post_pocess(context, untyped, full_gwas_slice, gwas_slice, region):
 def _gaussian_by_region(context, region):
     logging.log(8, "Roll out imputation")
     freq_filter = context.get_freq_filter()
+    print("Freq filter: ", freq_filter)
     variants_metadata = context.get_variants_metadata()
     window = context.get_window()
 
