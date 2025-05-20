@@ -80,7 +80,7 @@ if __name__ == "__main__":
     parser.add_argument("-output", help="Where to save stuff")
     parser.add_argument("-cutoff", help="naive cutoff when performing SVD", type=float, default=0)
     parser.add_argument("-regularization", help="Ridge-like regularization for matrix inversion", type=float, default=0)
-    parser.add_argument("-frequency_filter", help="Skip variants with frequency (below f) or above (1-f)", type=float, default=0)
+    parser.add_argument("-frequency_filter", help="Skip variants with frequency (below f) or above (1-f)", type=float)
     parser.add_argument("-sub_batches", help="Split the data into subsets", type=int)
     parser.add_argument("-sub_batch", help="only do this subset", type=int)
     parser.add_argument("-containing", help="only do this subset", type=int)
@@ -91,12 +91,6 @@ if __name__ == "__main__":
     parser.add_argument("-parsimony", help="Log verbosity level. 1 is everything being logged. 10 is only high level messages, above 10 will hardly log anything", default = "10")
 
     args = parser.parse_args()
-    if args.frequency_filter is not None:
-        print("frequency_filter", args.frequency_filter)
-        # Ensure the value is within a valid range (e.g., 0 <= frequency_filter < 1)
-        if not (0 <= args.frequency_filter < 1):
-            raise ValueError("frequency_filter must be between 0 (inclusive) and 1 (exclusive).")
-
 
     Logging.configure_logging(int(args.parsimony))
 

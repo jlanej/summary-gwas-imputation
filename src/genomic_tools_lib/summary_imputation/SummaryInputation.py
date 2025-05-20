@@ -213,15 +213,13 @@ def _post_pocess(context, untyped, full_gwas_slice, gwas_slice, region):
 def _gaussian_by_region(context, region):
     logging.log(8, "Roll out imputation")
     freq_filter = context.get_freq_filter()
-    print("Freq filter: ", freq_filter)
-    if freq_filter:
-        print("passes")
     variants_metadata = context.get_variants_metadata()
     window = context.get_window()
 
     variants_metadata_window = Genomics.entries_for_window(region.chromosome, region.start - window, region.end + window, variants_metadata)
-    use_variants_metadata_window = _filter_variants_by_freq(variants_metadata_window, freq_filter) if (freq_filter or freq_filter==0) else variants_metadata_window
-
+    print("Variants in window: ", variants_metadata_window.shape[0])
+    use_variants_metadata_window = _filter_variants_by_freq(variants_metadata_window, freq_filter) if freq_filter is not None else variants_metadata_window
+    print("Variants in window after freq filter: ", use_variants_metadata_window.shape[0])
     # top = use_variants_metadata_window.groupby(["chromosome", "position"]).\
     #     apply(lambda x: x.sort_values(by="effect_allele_frequency", ascending=False)).\
     #     reset_index(drop=True).groupby(["chromosome", "position"]).head(1)
