@@ -214,11 +214,13 @@ def _gaussian_by_region(context, region):
     logging.log(8, "Roll out imputation")
     freq_filter = context.get_freq_filter()
     print("Freq filter: ", freq_filter)
+    if freq_filter:
+        print("passes")
     variants_metadata = context.get_variants_metadata()
     window = context.get_window()
 
     variants_metadata_window = Genomics.entries_for_window(region.chromosome, region.start - window, region.end + window, variants_metadata)
-    use_variants_metadata_window = _filter_variants_by_freq(variants_metadata_window, freq_filter) if freq_filter else variants_metadata_window
+    use_variants_metadata_window = _filter_variants_by_freq(variants_metadata_window, freq_filter) if (freq_filter or freq_filter==0) else variants_metadata_window
 
     # top = use_variants_metadata_window.groupby(["chromosome", "position"]).\
     #     apply(lambda x: x.sort_values(by="effect_allele_frequency", ascending=False)).\
